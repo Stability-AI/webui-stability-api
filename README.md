@@ -1,11 +1,8 @@
-# Stability API Extension for Automatic1111 WebUI
+# Stability API Extension for Automatic1111 WebUI (Beta Release)
 
 ![image](https://user-images.githubusercontent.com/26013475/221394848-b05478e7-5512-485e-a41a-d8eca5280dc4.png)
 
-
-The Stability API Extension for Automatic1111 WebUI is a tool that enables users to generate Stable Diffusion images via the Stability API instead of on a local GPU.
-
-The Stability API provides many models for use at cheap costs without having to own your own expensive GPU or worry about disk space for large checkpoints.
+The Stability API Extension for Automatic1111 WebUI enables users to generate Stable Diffusion images via the Stability API instead of on a local GPU.
 
 ## Features
 
@@ -15,15 +12,17 @@ The Stability API provides many models for use at cheap costs without having to 
 
 - **inpainting**: Generate over specific portions of an image -use an inpainting model for best results!
 
-- **X/Y/Z plot support**: Generate plots to compare settings and outputs
-
 - **Batch Image Requests**: Generate large batches of images at a time
+
+- **Upscale ESRGAN x2Plus**: Upscale images to 2x their size (use via img2img)
+
+- **X/Y/Z plot support**: Generate plots to compare settings and outputs
 
 ## Benefits
 
 - Currently, the only way to test SDXL-beta with Automatic1111
 
-- Fast and cheap inference with the ability to generate images via the cloud
+- Fast and cheap inference
 
 - Trying out the newest models from Stability
 
@@ -58,3 +57,7 @@ The Stability API provides many models for use at cheap costs without having to 
 ![checkpoints](https://user-images.githubusercontent.com/26013475/221395323-2bca27c6-b82a-4910-975f-903bba85ea39.png)
 
 7. Enjoy creating without making your GPU going BRRRRR!
+
+## Known Issues
+
+1. May have compatability issues with other extensions
