@@ -44,6 +44,9 @@ class FakeModel:
 class StabilityGenerateError(Exception):
     pass
 
+class SAPIExtensionGenerateError(Exception):
+    pass
+
 cg = False
 cg_i2i = False
 error_message = None
@@ -92,12 +95,13 @@ class Main(scripts.Script):
 
     def halt_process(self, p, message):
         global error_message
-        print(f"Processing error {message}")
+        #print(f"Processing error {message}")
         p.n_iter = 0
         p.disable_extra_networks = True
         state.interrupted = True
         self.processing = False
         error_message = message
+        raise StabilityGenerateError(message)
    
 
     def process(self, p):
@@ -187,7 +191,7 @@ class Main(scripts.Script):
         
         if p.sampler_name not in self.SAMPLERS.keys():
             self.halt_process(p, "Sampler {} not supported by API, please use one of the following: {}".format(p.sampler_name, ", ".join(self.SAMPLERS.keys())))
-            return
+
         
         devices.torch_gc()
         self.processing = True
@@ -208,15 +212,11 @@ class Main(scripts.Script):
             }
 
             res = self.process_images_inner(p, model)
-        except Exception as e:
-            error_message = str(e)
-            self.halt_process(p, error_message)
-            return
+
         finally:
             if p.override_settings_restore_afterwards:
                 for k, v in stored_opts.items():
                     setattr(shared.opts, k, v)
-
         return res
 
     def process_images_inner(self, p, model):
@@ -231,11 +231,10 @@ class Main(scripts.Script):
 
         if "inpainting" in model and (self.is_img2img is False or getattr(p, "image_mask", None) is None): 
                 self.halt_process(p, "Inpainting model is for inpainting only")
-                raise StabilityGenerateError("Inpainting model requires a mask image")
+                
 
         if p.n_iter > 10:
             self.halt_process(p, "Please keep batch count <= 10")
-            raise StabilityGenerateError("Please keep count <= 10")
         
         if type(p.prompt) == list:
             assert(len(p.prompt) > 0)
@@ -391,7 +390,7 @@ class Main(scripts.Script):
                 shared.state.job_no += 1
                 shared.state.sampling_step = 0
                 shared.state.current_image_sampling_step = 0
-            
+
             p.color_corrections = None
             index_of_first_image = 0
             unwanted_grid_because_of_img_count = len(output_images) < 2 and shared.opts.grid_only_if_multiple
@@ -487,8 +486,7 @@ class Main(scripts.Script):
             files["init_image"] = buffer.getvalue()
 
             if p.image_mask is not None:
-                width, height = p.image_mask.size
-                image = ImageOps.fit(p.image_mask, (width, height), method=Image.Resampling.LANCZOS)
+                _, _, image = resize_image(p.image_mask)
                 if not p.inpainting_mask_invert:
                     image = ImageOps.invert(image)
                 buffer2 = io.BytesIO()
@@ -541,6 +539,5 @@ class Main(scripts.Script):
         except AssertionError:
             id = response.json()
             self.halt_process(p, id["message"])
-            raise StabilityGenerateError(id["message"])
 
 
