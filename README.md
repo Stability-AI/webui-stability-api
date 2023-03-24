@@ -20,7 +20,7 @@ The Stability API Extension for Automatic1111 WebUI enables users to generate St
 
 ## Benefits
 
-- Currently, the only way to test SDXL-beta with Automatic1111
+- The first way to test SDXL-beta with Automatic1111 when available
 
 - Fast and cheap inference
 
@@ -58,6 +58,10 @@ The Stability API Extension for Automatic1111 WebUI enables users to generate St
 
 7. Enjoy creating without making your GPU going BRRRRR!
 
-## Known Issues
+## Limitations / Issues
 
-1. May have compatability issues with other extensions
+1. May have compatability issues with other extensions. If you have issues please disable other extensions first before raising an issue.
+
+2. Maximum batch count of 10
+
+3. Clip Guidance is not available for all samplers
