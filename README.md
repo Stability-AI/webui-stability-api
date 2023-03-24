@@ -37,7 +37,7 @@ The Stability API provides many models for use at cheap costs without having to 
 
 1. Install AUTOMATIC1111 webui from https://github.com/AUTOMATIC1111/stable-diffusion-webui
 
-2. In the `Extensions > Install from URL` tab, paste in: `https://github.com/Stability-AI/stable-diffusion-webui-stability-api/`
+2. In the `Extensions > Install from URL` tab, paste in: `https://github.com/Stability-AI/webui-stability-api/`
 
 ![SAPI-install-0](https://user-images.githubusercontent.com/100188076/227592927-e4b9117f-0e7f-462a-9348-7f2fc28b2a30.jpg)
 
