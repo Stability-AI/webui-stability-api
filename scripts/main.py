@@ -44,9 +44,6 @@ class FakeModel:
 class StabilityGenerateError(Exception):
     pass
 
-class SAPIExtensionGenerateError(Exception):
-    pass
-
 cg = False
 cg_i2i = False
 error_message = None
@@ -95,7 +92,7 @@ class Main(scripts.Script):
 
     def halt_process(self, p, message):
         global error_message
-        print(f"Procesing error {message}")
+        print(f"Processing error {message}")
         p.n_iter = 0
         p.disable_extra_networks = True
         state.interrupted = True
@@ -141,9 +138,9 @@ class Main(scripts.Script):
     def update_api_message(self):
         global error_message, info_message
         if error_message:
-            return "\tAPI Error: {}".format(error_message)
+            return "\tStability API: {}".format(error_message)
         if info_message:
-            return "\tInfo: {}".format(info_message)
+            return "\tStability API Info: {}".format(info_message)
         return ""
 
     def after_component(self, component, **kwargs):
@@ -225,7 +222,7 @@ class Main(scripts.Script):
     def process_images_inner(self, p, model):
         # Copyright (C) 2023  AUTOMATIC1111
         # https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/00dab8f10defbbda579a1bc89c8d4e972c58a20d/modules/processing.py#L501-L717
-
+    
         fake_model = FakeModel(model)
         if type(p) == processing.StableDiffusionProcessingImg2Img:
             self.is_img2img = True
@@ -236,6 +233,9 @@ class Main(scripts.Script):
                 self.halt_process(p, "Inpainting model is for inpainting only")
                 raise StabilityGenerateError("Inpainting model requires a mask image")
 
+        if p.n_iter > 10:
+            self.halt_process(p, "Please keep batch count <= 10")
+            raise StabilityGenerateError("Please keep count <= 10")
         
         if type(p.prompt) == list:
             assert(len(p.prompt) > 0)
@@ -391,7 +391,7 @@ class Main(scripts.Script):
                 shared.state.job_no += 1
                 shared.state.sampling_step = 0
                 shared.state.current_image_sampling_step = 0
-
+            
             p.color_corrections = None
             index_of_first_image = 0
             unwanted_grid_because_of_img_count = len(output_images) < 2 and shared.opts.grid_only_if_multiple
@@ -542,4 +542,5 @@ class Main(scripts.Script):
             id = response.json()
             self.halt_process(p, id["message"])
             raise StabilityGenerateError(id["message"])
+
 
