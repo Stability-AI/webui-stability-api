@@ -5,7 +5,7 @@
 
 The Stability API Extension for Automatic1111 WebUI is a tool that enables users to generate Stable Diffusion images via the Stability API instead of on a local GPU.
 
-The Stability API provides many models for use at cheap costs without having to own your own expensive GPU or worry about disk space!
+The Stability API provides many models for use at cheap costs without having to own your own expensive GPU or worry about disk space for large checkpoints.
 
 ## Features
 
@@ -13,11 +13,11 @@ The Stability API provides many models for use at cheap costs without having to 
 
 - **img2img**: Generate images from input images
 
-- **inpainting**: Generate over specific portions of an image
+- **inpainting**: Generate over specific portions of an image -use an inpainting model for best results!
 
 - **X/Y/Z plot support**: Generate plots to compare settings and outputs
 
-- **Batch Image Requests**: Generate
+- **Batch Image Requests**: Generate large batches of images at a time
 
 ## Benefits
 
