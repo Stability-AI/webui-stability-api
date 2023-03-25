@@ -38,7 +38,7 @@ Say hello to the Stability API Extension for Automatic1111 WebUI, your go-to sol
 
 1. Install AUTOMATIC1111 webui from https://github.com/AUTOMATIC1111/stable-diffusion-webui
 
-2. In the Extensions > Install from URL tab, paste: https://github.com/Stability-AI/webui-stability
+2. In the Extensions > Install from URL tab, paste: https://github.com/Stability-AI/webui-stability-api
 
 ![SAPI-install-0](https://user-images.githubusercontent.com/100188076/227592927-e4b9117f-0e7f-462a-9348-7f2fc28b2a30.jpg)
 
