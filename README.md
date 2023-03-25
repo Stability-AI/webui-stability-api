@@ -70,7 +70,6 @@ Say hello to the Stability API Extension for Automatic1111 WebUI, your go-to sol
 
 ✂️ Clip Guidance is not available for all samplers.
 
-🎉 Get ready to embark on a wonderful journey of creativity and innovation with the Stability API Extension for Automatic1111 WebUI! 🚀 
 
 Enjoy, and happy image generating! 🖼️
 
