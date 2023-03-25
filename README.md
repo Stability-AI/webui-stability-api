@@ -1,4 +1,4 @@
-# 🚀 Introducing: Stability API Extension for Automatic1111 WebUI 🎉
+# 🚀 Stability API Extension for Automatic1111 WebUI 🎉
 
 ![image](https://user-images.githubusercontent.com/26013475/221394848-b05478e7-5512-485e-a41a-d8eca5280dc4.png) (Beta Release)
 
