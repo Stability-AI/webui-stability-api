@@ -442,15 +442,11 @@ class Main(scripts.Script):
 
 
         payload = {
-            "text_prompts": [{
-                "text": prompt,
-                "weight": 1.0
-            },
-            {
-                "text": negative_prompt if len(negative_prompt) > 0 else ".",
-                "weight": -1.0 if len(negative_prompt) > 0 else 0.0
-                }
-            ],
+                "text_prompts": [
+                {"text": prompt, "weight": 1.0}
+                ] + (
+                [{"text": negative_prompt, "weight": -1.0}] if len(negative_prompt) > 0 else []
+                ),
             "cfg_scale": p.cfg_scale,
             "seed": seed,
             "height": round_to_64(p.height),
@@ -471,8 +467,7 @@ class Main(scripts.Script):
             img2img_payload={
                 "text_prompts[0][text]": prompt,
                 "text_prompts[0][weight]": 1.0,
-                "text_prompts[1][text]": negative_prompt if len(negative_prompt) > 0 else ".",
-                "text_prompts[1][weight]": -1.0 if len(negative_prompt) > 0 else 0.0,
+
                 "cfg_scale": payload["cfg_scale"],
                 "seed": payload["seed"],
                 "steps": payload["steps"],
@@ -481,6 +476,10 @@ class Main(scripts.Script):
                 "sampler": payload["sampler"]
             }
 
+            if len(negative_prompt) > 0:
+                img2img_payload["text_prompts[1][text]"] = negative_prompt 
+                img2img_payload["text_prompts[1][weight]"] = -1.0 
+                
             buffer = io.BytesIO()
             image.save(buffer, format="PNG")
             files["init_image"] = buffer.getvalue()
