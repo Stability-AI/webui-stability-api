@@ -66,8 +66,6 @@ Say hello to the Stability API Extension for Automatic1111 WebUI, your go-to sol
 
 ⚠️ May have compatibility issues with other extensions. Before raising an issue, try disabling other extensions first.
 
-📊 Maximum batch count of 10.
-
 ✂️ Clip Guidance is not available for all samplers.
 
 
