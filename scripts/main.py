@@ -233,8 +233,8 @@ class Main(scripts.Script):
                 self.halt_process(p, "Inpainting model is for inpainting only")
                 
 
-        if p.n_iter > 10:
-            self.halt_process(p, "Please keep batch count <= 10")
+        #if p.n_iter > 10:
+        #    self.halt_process(p, "Please keep batch count <= 10")
         
         if type(p.prompt) == list:
             assert(len(p.prompt) > 0)
