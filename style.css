@@ -1,11 +1,11 @@
-#stablity_update_model,
-#stablity_show_api_key {
+#stability_update_model,
+#stability_show_api_key {
   min-width: auto;
   flex-grow: 0;
   padding-left: 0.25em;
   padding-right: 0.25em;
 }
 
-#stablity_model_row {
+#stability_model_row {
   gap: 0.5rem;
 }
